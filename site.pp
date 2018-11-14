@@ -12,11 +12,12 @@ node 'host-106.162.serverel.net' {
         user {'test' :
                 ensure => 'present',
                 comment => 'local test user',
-                uid => '123456',
-                gid => '27',
+                #uid => '123456',
+                #gid => '27',
                 password => pw_hash('password', 'SHA-512', 'mysalt'),
                 home => '/home/test',
                 shell => '/bin/bash',
+                managehome => true,
         }
 
         exec {'apt-get update':
@@ -35,7 +36,7 @@ node 'host-106.162.serverel.net' {
         apt::key {'EA312927':
                 ensure => present,
                 server => "hkp://keyserver.ubuntu.com:80",
-                id => 'EA312927',
+                id => '42F3E95A2C4F08279C4960ADD68FA50FEA312927',
         }
 
         exec {'source.list':
